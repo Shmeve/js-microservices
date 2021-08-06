@@ -9,6 +9,7 @@ import { signuprRouter} from './routes/signup';
 
 // Middleware
 import { errorHandler } from './middlewares/error-handler';
+import { NotFoundError } from './errors/not-found-error';
 
 const PORT = 3000;
 
@@ -21,6 +22,11 @@ app.use(currentUserRouter);
 app.use(signinrRouter);
 app.use(signoutrRouter);
 app.use(signuprRouter);
+
+// Catch all 404
+app.all('*', () => {
+    throw new NotFoundError();
+});
 
 // Apply Middleware
 app.use(errorHandler);
