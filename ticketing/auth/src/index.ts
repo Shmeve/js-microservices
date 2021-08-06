@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import { json } from 'body-parser';
 
 // Routers
@@ -24,7 +25,7 @@ app.use(signoutrRouter);
 app.use(signuprRouter);
 
 // Catch all 404
-app.all('*', () => {
+app.all('*', async () => {
     throw new NotFoundError();
 });
 
